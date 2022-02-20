@@ -15,7 +15,7 @@ body = {
     'optionEnchant': {
         'enchant': 0
     },
-    'optionPrice': {git remote add origin https://github.com/nguyenhonglich111-1001/Knightwar.git
+    'optionPrice': {
         'minPrice': 0,
         'highPrice': 6500
     },
