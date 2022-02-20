@@ -79,7 +79,7 @@ def dpsCalc(id):
             is_duplicate = True
             levelduplicate = ability['level']
 
-    return [int(baseSPD * baseATK * (1 + is_duplicate * duplicateCalc(levelduplicate))) + 0.1 * is_duplicate, info]
+    return [int(baseSPD * baseATK), info]
 
 
 url = 'https://api.knightwar.io/item/listItem/'
@@ -138,7 +138,7 @@ for id in oldId:
         i += 1
         dps = dpsCalc(id)
         print(str(id) + ' ' + str(dps))
-        if dps[0] >= 500:
+        if dps[0] >= 450:
             response = requests.get('https://api.knightwar.io/item/getItemById/' + str(id))
             price = response.json()['data']['sellPrice'][:-18]
 

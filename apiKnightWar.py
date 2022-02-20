@@ -165,7 +165,7 @@ def compare_OldOwner():
                                       + ', ' + dps[4] + ' \n'
                                       + str(priceDict[str(id)]) + 'KWS:\n' + marketplace_url + str(id))
 
-            if dps[0] >= 500:
+            if dps[0] >= 450:
 
                 send_test_message('NEW       ' + str(dps[0]) + 'dps\n' + dps[1]
                                   + ',       ' + dps[2] + ' \n' + dps[3]
@@ -209,9 +209,9 @@ def run():
     # #
     # #
     # # # Update id and owner and price
-    # toFilte_idList()
-    # toFile_owner()
-    # toFile_price()
+    toFilte_idList()
+    toFile_owner()
+    toFile_price()
 
 
 preTotal = -1
@@ -242,8 +242,8 @@ while 1:
         time.sleep(180)
         pass
     if i % 30 == 0:
-        time.sleep(240)
-    time.sleep(60)
+        time.sleep(200)
+    time.sleep(50)
 
     # Change user agent
     ua_list = [
@@ -288,4 +288,4 @@ while 1:
         send_test_message('Break dude to api')
         break
 
-    time.sleep(60)
+    time.sleep(50)
