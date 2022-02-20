@@ -135,16 +135,17 @@ def compare_OldOwner():
 
         # compare time
 
-        # dps[0] dps
+        # dps[0] baseDPS
         # dps[1] type
         # dps[2] star
         # dps[3] level
         # dps[4] info
+        # dps[5] baseHP
 
         #  New one, not int old id
         if str(id) not in oldId:
             dps = dpsCalc(str(id))
-            time.sleep(12)
+            time.sleep(6)
             print(str(id) + ' ' + dps[2][0])
             if dps[2][0] == '1':
                 if dps[0] >= 333:
@@ -152,6 +153,11 @@ def compare_OldOwner():
                                       + ', ' + dps[2] + ' \n' + dps[3]
                                       + ', ' + dps[4] + ' \n'
                                       + str(priceDict[str(id)]) + 'KWS:\n' + marketplace_url + str(id))
+                if dps[5] >= 1600 and dps[1] == 'sword':
+                    send_test_message('1* Basehp ' + str(dps[0]) + 'dps\n' + dps[1]
+                                     + ', ' + dps[2] + ' \n' + dps[3]
+                                     + ', ' + dps[4] + ' \n'
+                                     + str(priceDict[str(id)]) + 'KWS:\n' + marketplace_url + str(id))
 
             if int(dps[2][0]) > 2:
                     send_test_message('SuperDeal NEW ' + str(dps[0]) + 'dps\n' + dps[1]
@@ -168,6 +174,19 @@ def compare_OldOwner():
 
             if int(priceDict[str(id)]) <= 700:
                 send_test_message('SUPERRRRRRR DEALLLLLL\n' + marketplace_url + str(id))
+        else:
+
+            try:
+                if int(priceDict[str(id)]) != int(oldPrice[str(id)]):
+                    dps = dpsCalc(str(id))
+                    time.sleep(6)
+                    if dps[0] >= 500 or int(dps[2][0]) > 2:
+                        send_test_message('Change Price NEW ' + str(dps[0]) + 'dps\n' + dps[1]
+                                          + ', ' + dps[2] + ' \n' + dps[3]
+                                          + ', ' + dps[4] + ' \n'
+                                          + str(priceDict[str(id)]) + 'KWS:\n' + marketplace_url + str(id))
+            except:
+                pass
 
 
 def countdown(t):
@@ -190,9 +209,9 @@ def run():
     # #
     # #
     # # # Update id and owner and price
-    toFilte_idList()
-    toFile_owner()
-    toFile_price()
+    # toFilte_idList()
+    # toFile_owner()
+    # toFile_price()
 
 
 preTotal = -1
