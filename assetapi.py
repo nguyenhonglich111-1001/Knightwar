@@ -2,17 +2,71 @@ import requests
 import json
 import random
 
-url = 'https://nft.knightwar.io/asset/1008979'
+
 
 
 def basestatCalc(now, star, level):
     return now / (1 + (level - 1) * star / 100)
 
 
-def duplicateCalc(level):
-    return (2.5 * level * level + 2.5 * level + 20) / 100
+def maxLevelByStar(star):
+    switcher={
+        1: 50,
+        2: 70,
+        3: 90,
+        4: 110,
+        5: 130
+    }
+
+    return switcher[star]
+def lvMaxstatCalc(now, star, level):
+    maxLevel = maxLevelByStar(star)
+
+    return now * (1 + (maxLevel - 1) * star / 100)
+
+# Duplicating':0, 'Enhanced':0, 'Enraged':0, 'Explosive':0}
+def duplicating(level):
+    switcher = {
+        0: 0,
+        1: 0.25,
+        2: 0.35,
+        3: 0.5
+    }
+
+    return switcher[level]
 
 
+def enhanced(level):
+    switcher = {
+        0: 0,
+        1: 0.1,
+        2: 0.17,
+        3: 0.25
+    }
+
+    return switcher[level]
+
+
+def enraged(level):
+    switcher = {
+        0: 0,
+        1: 0.9,
+        2: 1.6,
+        3: 2.5
+    }
+
+    return switcher[level]
+
+
+def explosive(level):
+    switcher = {
+        0: 0,
+        1: 0.2,
+        2: 0.33,
+        3: 0.49
+    }
+
+    return switcher[level]
 def dpsCalc(id):
     ua_list = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 "
@@ -66,21 +120,44 @@ def dpsCalc(id):
     star = attributes[0]['value']
     level = attributes[2]['value']
     type = attributes[1]['value']
-    baseATK = basestatCalc(attributes[3]['value'], star, level)
-    baseSPD = basestatCalc(attributes[4]['value'], star, level)
-    baseHP = basestatCalc(attributes[5]['value'], star, level)
+    baseATK = round(basestatCalc(attributes[3]['value'], star, level),2)
+    baseSPD = round(basestatCalc(attributes[4]['value'], star, level),2)
+    baseHP = round(basestatCalc(attributes[5]['value'], star, level),2)
+    baseCRIT = round(basestatCalc(attributes[6]['value'], star, level),2)
+    lvMaxATK = round(lvMaxstatCalc(baseATK, star, level),2)
+    lvMaxSPD = round(lvMaxstatCalc(baseSPD, star, level),2)
+    lvMaxHP = round(lvMaxstatCalc(baseHP, star, level),2)
+    lvMaxCRIT = round(lvMaxstatCalc(baseCRIT, star, level),2)
+    skill = {'Duplicating': 0, 'Enhanced': 0, 'Enraged': 0, 'Explosive': 0}
 
-    info = ' '
 
+    baseInfo = str(baseATK) + ' ' + str(baseSPD) + ' ' + str(baseHP) + ' ' + str(baseCRIT)
+    lvMaxInfo = str(lvMaxATK) + ' ' + str(lvMaxSPD) + ' ' + str(lvMaxHP) + ' ' + str(lvMaxCRIT)
+    skills = ' '
     for ability in abilities:
-        info += ' ' + ability['name']
-        if ability['name'] == 'Duplicating':
-            is_duplicate = True
-            levelduplicate = ability['level']
+        skills += ' ' + ability['name']
+        if ability['name'] in skill:
+            skill[ability['name']] = ability['level']
+
+    baseDPS = baseSPD*baseATK;
+    lvMaxDPS = lvMaxSPD*lvMaxATK;
+    withSkill_baseDPS = baseDPS*(1 + baseCRIT/100*(1 + enhanced(skill['Enhanced'])) + duplicating(skill['Duplicating'])
+                             + enraged(skill['Enraged']) + explosive(skill['Explosive']))
+    withSkill_baseDPS = int(withSkill_baseDPS)
+
+    withSkill_lvMaxDPS = lvMaxDPS*(1 + lvMaxCRIT/100*(1 + enhanced(skill['Enhanced'])) + duplicating(skill['Duplicating'])
+                             + enraged(skill['Enraged']) + explosive(skill['Explosive']))
+    withSkill_lvMaxDPS = int(withSkill_lvMaxDPS)
+
+    print(skill)
 
     return [int(baseSPD * baseATK),
-            type, str(star) + ' Star(s)', str(level) + ' levels', info, baseHP]
+            type, str(star) + ' Star(s)', str(level) + ' levels', skills, baseInfo, lvMaxInfo,
+            baseDPS, withSkill_baseDPS, lvMaxDPS, withSkill_lvMaxDPS]
 
+print(dpsCalc(1006483))
+
+# dpsCalc()
 # dps = dpsCalc(str(1010981))
 # print('1* NEW ' + str(dps[0]) + 'dps\n' + dps[1] +
 #                                       + ', ' + dps[2] + '\n' + dps[3] +
