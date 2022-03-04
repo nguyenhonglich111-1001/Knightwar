@@ -154,10 +154,16 @@ def dpsCalc(id):
 
 
     return [int(baseSPD * baseATK),
-            type, str(star) + ' Star(s)', str(level) + ' levels', skills, baseInfo, lvMaxInfo,
-            withSkill_baseDPS, withSkill_lvMaxDPS]
+            type,
+            str(star) + ' Star(s)',
+            str(level) + ' levels',
+            skills,
+            baseInfo,
+            lvMaxInfo,
+            withSkill_baseDPS,
+            withSkill_lvMaxDPS]
 
-print((dpsCalc(1005987)))
+# print((dpsCalc(1009021)))
 
 # dpsCalc()
 # dps = dpsCalc(str(1010981))
