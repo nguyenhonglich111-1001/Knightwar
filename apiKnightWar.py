@@ -149,30 +149,34 @@ def compare_OldOwner():
             print(str(id) + ' ' + dps[2][0])
             if dps[2][0] == '1':
                 if dps[0] >= 333:
-                    send_test_message('1 NEW ' + dps[2] + 'dps\n'
-                                      + dps[1] + ', ' + str(dps[0]) + '\n'
+                    send_test_message('1 NEW ' + dps[2] + '\n'
+                                      + dps[1] + '\n'
+                                      + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
                                       + dps[3] + ', ' + dps[4] + '\n'
-                                      + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
+                                      + str(priceDict[str(id)]) + 'KWS\n'
                                       + marketplace_url + str(id))
                 if dps[5] >= 1600 and dps[1] == 'sword':
-                    send_test_message('1* Basehp ' + dps[2] + 'dps\n'
-                                      + dps[1] + ', ' + str(dps[0]) + '\n'
+                    send_test_message('1* Basehp ' + dps[2] + '\n'
+                                      + dps[1] + '\n'
+                                      + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
                                       + dps[3] + ', ' + dps[4] + '\n'
-                                      + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
+                                      + str(priceDict[str(id)]) + 'KWS\n'
                                       + marketplace_url + str(id))
 
             if int(dps[2][0]) > 2:
-                send_test_message('SuperDeal NEW ' + dps[2] + 'dps\n'
-                                  + dps[1] + ', ' + str(dps[0]) + '\n'
+                send_test_message('SuperDeal NEW ' + dps[2] + '\n'
+                                  + dps[1] + '\n'
+                                  + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
                                   + dps[3] + ', ' + dps[4] + '\n'
-                                  + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
+                                  + str(priceDict[str(id)]) + 'KWS\n'
                                   + marketplace_url + str(id))
 
-            if dps[0] >= 450:
-                send_test_message('NEW       ' + dps[2] + 'dps\n'
-                                  + dps[1] + ', ' + str(dps[0]) + '\n'
+            if dps[8] >= 3900:
+                send_test_message('NEW       ' + dps[2] + '\n'
+                                  + dps[1] + '\n'
+                                  + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
                                   + dps[3] + ', ' + dps[4] + '\n'
-                                  + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
+                                  + str(priceDict[str(id)]) + 'KWS\n'
                                   + marketplace_url + str(id))
 
             if int(priceDict[str(id)]) <= 700:
@@ -184,11 +188,13 @@ def compare_OldOwner():
                     dps = dpsCalc(str(id))
                     time.sleep(6)
                     if dps[0] >= 500 or int(dps[2][0]) > 2:
-                        send_test_message('Change Price NEW ' + dps[2] + 'dps\n'
-                                          + dps[1] + ', ' + str(dps[0]) + '\n'
+                        send_test_message('Change Price NEW ' + dps[2] + '\n'
+                                          + dps[1] + '\n'
+                                          + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
                                           + dps[3] + ', ' + dps[4] + '\n'
                                           + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
                                           + marketplace_url + str(id))
+
             except:
                 pass
 
