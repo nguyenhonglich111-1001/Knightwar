@@ -128,6 +128,8 @@ def dpsCalc(id):
     lvMaxSPD = round(lvMaxstatCalc(baseSPD, star, level),2)
     lvMaxHP = round(lvMaxstatCalc(baseHP, star, level),2)
     lvMaxCRIT = round(lvMaxstatCalc(baseCRIT, star, level),2)
+    if(lvMaxCRIT > 100):
+        lvMaxCRIT = 100
     skill = {'Duplicating': 0, 'Enhanced': 0, 'Enraged': 0, 'Explosive': 0}
 
 
@@ -139,23 +141,23 @@ def dpsCalc(id):
         if ability['name'] in skill:
             skill[ability['name']] = ability['level']
 
-    baseDPS = baseSPD*baseATK;
-    lvMaxDPS = lvMaxSPD*lvMaxATK;
-    withSkill_baseDPS = baseDPS*(1 + baseCRIT/100*(1 + enhanced(skill['Enhanced'])) + duplicating(skill['Duplicating'])
-                             + enraged(skill['Enraged']) + explosive(skill['Explosive']))
+    baseDPS = int(baseSPD*baseATK);
+    lvMaxDPS = int(lvMaxSPD*lvMaxATK);
+    withSkill_baseDPS = baseDPS*(1 + baseCRIT/100*(1 + enraged(skill['Enraged']) ) + duplicating(skill['Duplicating'])
+                             + enhanced(skill['Enhanced']) + explosive(skill['Explosive']))
     withSkill_baseDPS = int(withSkill_baseDPS)
 
-    withSkill_lvMaxDPS = lvMaxDPS*(1 + lvMaxCRIT/100*(1 + enhanced(skill['Enhanced'])) + duplicating(skill['Duplicating'])
-                             + enraged(skill['Enraged']) + explosive(skill['Explosive']))
+    withSkill_lvMaxDPS = lvMaxDPS*(1 + lvMaxCRIT/100*(1 + enraged(skill['Enraged'])) + duplicating(skill['Duplicating'])
+                             + enhanced(skill['Enhanced']) + explosive(skill['Explosive']))
     withSkill_lvMaxDPS = int(withSkill_lvMaxDPS)
 
-    print(skill)
+
 
     return [int(baseSPD * baseATK),
             type, str(star) + ' Star(s)', str(level) + ' levels', skills, baseInfo, lvMaxInfo,
             baseDPS, withSkill_baseDPS, lvMaxDPS, withSkill_lvMaxDPS]
 
-print(dpsCalc(1006483))
+print((dpsCalc(1000004)))
 
 # dpsCalc()
 # dps = dpsCalc(str(1010981))
