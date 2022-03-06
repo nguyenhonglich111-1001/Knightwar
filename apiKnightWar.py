@@ -17,7 +17,7 @@ body = {
     },
     'optionPrice': {
         'minPrice': 0,
-        'highPrice': 3000
+        'highPrice': 7000
     },
     'optionStar': {
         'star1': False,
@@ -167,19 +167,23 @@ def compare_OldOwner():
                 send_test_message('SuperDeal NEW ' + dps[2] + '\n'
                                   + dps[1] + '\n'
                                   + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
+                                  + dps[5] + '\n'
+                                  + dps[6] + '\n'
                                   + dps[3] + ', ' + dps[4] + '\n'
                                   + str(priceDict[str(id)]) + 'KWS\n'
                                   + marketplace_url + str(id))
 
             if dps[8] >= 3900:
-                send_test_message('NEW       ' + dps[2] + '\n'
+                send_test_message('NEW    ' + dps[2] + '\n'
                                   + dps[1] + '\n'
-                                  + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
+                                  + str(dps[7]) + ' dps      -->     ' + str(dps[8]) + ' dps\n'
+                                  + dps[5] + '\n'
+                                  + dps[6] + '\n'
                                   + dps[3] + ', ' + dps[4] + '\n'
                                   + str(priceDict[str(id)]) + 'KWS\n'
                                   + marketplace_url + str(id))
 
-            if int(priceDict[str(id)]) <= 700:
+            if int(priceDict[str(id)]) <= 400:
                 send_test_message('SUPERRRRRRR DEALLLLLL\n' + marketplace_url + str(id))
         else:
 
@@ -187,10 +191,12 @@ def compare_OldOwner():
                 if int(priceDict[str(id)]) != int(oldPrice[str(id)]):
                     dps = dpsCalc(str(id))
                     time.sleep(6)
-                    if dps[0] >= 500 or int(dps[2][0]) > 2:
+                    if dps[8] >= 3900:
                         send_test_message('Change Price NEW ' + dps[2] + '\n'
                                           + dps[1] + '\n'
                                           + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
+                                          + dps[5] + '\n'
+                                          + dps[6] + '\n'
                                           + dps[3] + ', ' + dps[4] + '\n'
                                           + str(oldPrice[str(id)]) + 'KWS ->' + str(priceDict[str(id)]) + '\n'
                                           + marketplace_url + str(id))
