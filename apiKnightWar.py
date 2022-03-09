@@ -21,11 +21,11 @@ body = {
     },
     'optionStar': {
         'star1': False,
-        'star2': False,
-        'star3': False,
-        'star4': False,
-        'star5': False,
-        'star6': False
+        'star2': True,
+        'star3': True,
+        'star4': True,
+        'star5': True,
+        'star6': True
     },
     'pageIndex': 1,
     'pageSize': 300,
@@ -163,15 +163,7 @@ def compare_OldOwner():
             #                           + str(priceDict[str(id)]) + 'KWS\n'
             #                           + marketplace_url + str(id))
 
-            if int(dps[2][0]) > 2:
-                send_test_message('SuperDeal NEW ' + dps[2] + '\n'
-                                  + dps[1] + '\n'
-                                  + str(dps[7]) + 'dps -->' + str(dps[8]) + 'dps\n'
-                                  + dps[5] + '\n'
-                                  + dps[6] + '\n'
-                                  + dps[3] + ', ' + dps[4] + '\n'
-                                  + str(priceDict[str(id)]) + 'KWS\n'
-                                  + marketplace_url + str(id))
+
 
             if dps[8] >= 3900:
                 send_test_message('NEW    ' + dps[2] + '\n'
